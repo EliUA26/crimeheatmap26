@@ -1,0 +1,7 @@
+psycopg2-binary
+folium
+pandas
+geopy
+requests
+g4f
+flask

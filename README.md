@@ -1,0 +1,31 @@
+# 🔥 CrimeHeatMapPy  
+### Análisis geoespacial de criminalidad con IA + visualización interactiva
+
+🌐 **Demo en vivo:**  
+https://crimeheatmappy-ebedftesa2hjb5a0.canadacentral-01.azurewebsites.net/
+
+---
+
+## 📌 Descripción
+
+**CrimeHeatMapPy** es una plataforma que recolecta, procesa y visualiza datos de criminalidad en un mapa interactivo tipo *heatmap*.  
+
+El sistema automatiza todo el flujo:
+
+- Scraping de noticias o fuentes  
+- Procesamiento con inteligencia artificial  
+- Almacenamiento en base de datos  
+- Generación de mapas dinámicos  
+
+El resultado es una herramienta útil para análisis urbano, seguridad pública y exploración de datos.
+
+---
+
+## 🚀 Características
+
+- 🧠 Procesamiento con IA  
+- 🌍 Mapa interactivo (Heatmap)  
+- 🔄 Pipeline automatizado  
+- 🗄️ Persistencia de datos  
+- ☁️ Despliegue en Azure  
+- ⚡ Backend modular en Python  
