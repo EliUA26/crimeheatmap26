@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+html, body {
+    margin:0;
+    height:100%;
+}
+
+#map {
+    width:100%;
+    height:100vh;
+}
+
+.crime-icon {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.35);
+}
+
+.crime-homicidio {
+    background: orange;
+    border-radius: 50%;
+}
+
+.crime-robo {
+    background: red;
+    border-radius: 0;
+}
+
+.crime-hurto {
+    background: blue;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.crime-narcotrafico {
+    background: green;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.crime-violencia {
+    background: darkpurple;
+    border-radius: 20% / 50%;
+}
+
+.crime-otro {
+    background: gray;
+    border-radius: 50%;
+}
+
+.filter-box {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #333;
+    min-width: 200px;
+}
+
+.filter-box label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.filter-box select {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    font-size: 13px;
+}
+
+.legend {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #333;
+    min-width: 170px;
+}
+
+.legend-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.legend-item:last-child {
+    margin-bottom: 0;
+}
+
+.legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.legend-homicidio { background: orange; }
+.legend-robo { background: red; }
+.legend-hurto { background: blue; }
+.legend-narcotrafico { background: green; }
+.legend-violencia { background: darkpurple; }
+/* Popup card styles */
+.popup-card {
+    width: 260px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #222;
+}
+.popup-row {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+}
+.popup-badge {
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    display:inline-block;
+    border:1px solid rgba(0,0,0,0.08);
+}
+.badge-homicidio { background: orange }
+.badge-robo { background: red }
+.badge-hurto { background: blue }
+.badge-narcotrafico { background: green }
+.badge-violencia { background: rebeccapurple }
+.popup-title { font-weight:700; font-size:14px; }
+.popup-sub { color:#666; font-size:12px; margin-bottom:8px; }
+.popup-summary { color:#333; max-height:80px; overflow:auto; }
+.popup-link { display:inline-block; margin-top:8px; color:#0b6efd; text-decoration:none; }
+.popup-link:hover { text-decoration:underline; }</style>
+</head>
+<body>
+
+<div id="map"></div>
+<div class="filter-box">
+    <label for="tipo-delito-filter">Filtrar por tipo de delito</label>
+    <select id="tipo-delito-filter">
+        <option value="todos">Todos los delitos</option>
+    </select>
+</div>
+<div class="legend" id="legend">
+    <div class="legend-title">Tipos de Delito</div>
+    <div class="legend-item"><span class="legend-color legend-homicidio"></span>Homicidio</div>
+    <div class="legend-item"><span class="legend-color legend-robo"></span>Robo / Asalto</div>
+    <div class="legend-item"><span class="legend-color legend-hurto"></span>Hurto</div>
+    <div class="legend-item"><span class="legend-color legend-narcotrafico"></span>Narcotráfico</div>
+    <div class="legend-item"><span class="legend-color legend-violencia"></span>Violencia / Otros</div>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+<script>
+
+const map = L.map('map')
+.setView([-25.2822, -57.6359], 13);
+
+L.tileLayer(
+'https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&apistyle=s.t:2|p.v:off', {
+    attribution: '&copy; Google Maps',
+    maxZoom: 20
+}
+).addTo(map);
+
+const markersLayer = L.layerGroup().addTo(map);
+let heatLayer;
+const markerItems = [];
+const filterContainer = document.getElementById('tipo-delito-filter');
+
+function getMarkerIcon(tipo) {
+    const lower = (tipo || '').toLowerCase();
+
+    if (lower.includes('robo') || lower.includes('asalto')) {
+        return L.icon({
+            iconUrl: 'https://www.flaticon.es/download/icon/69192?icon_id=69192&author=1&team=1&keyword=bolsa+de+dinero&pack=111415&style=Others&style_id=0&format=png&color=%23000000&colored=1&size=256&selection=1&type=standard&search=robo',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+    }
+
+     if (lower.includes('homicidio') ) {
+        return L.icon({
+            iconUrl: 'https://www.flaticon.es/download/icon/9875127?icon_id=9875127&author=914&team=914&keyword=escena+del+crimen&pack=9875115&style=Lineal+color&style_id=15&format=png&color=%23000000&colored=2&size=256&selection=1&type=standard&search=crime' ,
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+    }
+
+
+     if (lower.includes('narcotrafico') || lower.includes('lavado de dinero') ) {
+        return L.icon({
+            iconUrl: 'https://www.flaticon.es/download/icon/13647761?icon_id=13647761&author=861&team=861&keyword=joyas&pack=13647474&style=outline&style_id=1380&format=png&color=%23000000&colored=1&size=256&selection=1&type=standard&search=diamante' ,
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+    }
+        if (lower.includes('armas') ) {
+        return L.icon({
+            iconUrl: 'https://www.flaticon.es/download/icon/1680?icon_id=1680&author=1&team=1&keyword=arma+de+fuego&pack=0&style=Others&style_id=0&format=png&color=%23000000&colored=1&size=256&selection=1&type=standard&search=armas' ,
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+    }
+    
+
+    let className = 'crime-otro';
+       
+
+
+    return L.divIcon({
+        className: `crime-icon ${className}`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+    });
+}
+
+function getBadgeClass(tipo) {
+    const lower = (tipo || '').toLowerCase();
+    if (lower.includes('homicidio')) return 'badge-homicidio';
+    if (lower.includes('robo') || lower.includes('asalto')) return 'badge-robo';
+    if (lower.includes('hurto')) return 'badge-hurto';
+    if (lower.includes('droga') || lower.includes('narcotrafico')) return 'badge-narcotrafico';
+    if (lower.includes('violencia') || lower.includes('agresion')) return 'badge-violencia';
+    return 'badge-otro';
+}
+
+fetch('/api/delitos')
+.then(r => r.json())
+.then(data => {
+    const heatPoints = [];
+    const tipos = new Set();
+
+    data.forEach(item => {
+        const lat = parseFloat(item.lat);
+        const lng = parseFloat(item.lng);
+        const tipo = item.tipo ? item.tipo.trim() : 'Desconocido';
+
+        if (Number.isFinite(lat) && Number.isFinite(lng)) {
+            heatPoints.push([lat, lng, 0.5]);
+
+                    const marker = L.marker([lat, lng], {
+                icon: getMarkerIcon(tipo)
+            });
+            const badgeClass = getBadgeClass(tipo);
+            const popupHtml = `
+                <div class="popup-card">
+                    <div class="popup-row">
+                        <span class="popup-badge ${badgeClass}"></span>
+                        <div class="popup-title">${tipo}</div>
+                    </div>
+                    <div class="popup-sub">${item.ciudad}</div>
+                    <div class="popup-summary">${item.resumen}</div>
+                    <a class="popup-link" href="${item.url}" target="_blank">Fuente</a>
+                </div>
+            `;
+            marker.bindPopup(popupHtml);
+
+            markerItems.push({ marker, tipo });
+            markersLayer.addLayer(marker);
+            tipos.add(tipo);
+        }
+    });
+
+    tipos.forEach(tipo => {
+        const option = document.createElement('option');
+        option.value = tipo;
+        option.textContent = tipo;
+        filterContainer.appendChild(option);
+    });
+
+    filterContainer.addEventListener('change', () => {
+        const selected = filterContainer.value;
+        markersLayer.clearLayers();
+
+        markerItems.forEach(item => {
+            if (selected === 'todos' || item.tipo === selected) {
+                markersLayer.addLayer(item.marker);
+            }
+        });
+    });
+
+    if (heatPoints.length) {
+        heatLayer = L.heatLayer(heatPoints, {
+            radius: 25,
+            blur: 15,
+            maxZoom: 17,
+            gradient: {0.2: 'blue', 0.4: 'cyan', 0.6: 'lime', 0.8: 'orange', 1.0: 'red'}
+        }).addTo(map);
+    }
+
+    L.control.layers(null, {
+        'Marcadores': markersLayer,
+        'Heatmap': heatLayer
+    }).addTo(map);
+});
+
+</script>
+
+</body>
+</html>

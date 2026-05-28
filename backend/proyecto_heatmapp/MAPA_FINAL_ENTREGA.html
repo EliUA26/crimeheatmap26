@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2a20e7ab6ab6a402dc13efee2a921756 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 40px; left: 40px; width: 220px; background-color: white; border-radius: 12px; padding: 14px; z-index: 9999; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); border: 1px solid #ddd;">
+    <div style="font-weight: bold; margin-bottom: 10px; font-size: 15px; color: #2c3e50; text-align: center;">Tipos de Delito</div>
+    <div style="margin-bottom: 6px;"><span style="display:inline-block; width:14px; height:14px; background:red; border-radius:50%; margin-right:8px;"></span>Robo / Asalto</div>
+    <div style="margin-bottom: 6px;"><span style="display:inline-block; width:14px; height:14px; background:orange; border-radius:50%; margin-right:8px;"></span>Homicidio</div>
+    <div style="margin-bottom: 6px;"><span style="display:inline-block; width:14px; height:14px; background:green; border-radius:50%; margin-right:8px;"></span>Narcotráfico</div>
+    <div style="margin-bottom: 6px;"><span style="display:inline-block; width:14px; height:14px; background:black; border-radius:50%; margin-right:8px;"></span>Armas</div>
+    <div><span style="display:inline-block; width:14px; height:14px; background:blue; border-radius:50%; margin-right:8px;"></span>Otros</div>
+</div>
+    
+            <div class="folium-map" id="map_2a20e7ab6ab6a402dc13efee2a921756" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2a20e7ab6ab6a402dc13efee2a921756 = L.map(
+                "map_2a20e7ab6ab6a402dc13efee2a921756",
+                {
+                    center: [-25.2822, -57.6359],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e87aff0ed8b5ca6643067f0c2e1655b3 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e87aff0ed8b5ca6643067f0c2e1655b3.addTo(map_2a20e7ab6ab6a402dc13efee2a921756);
+        
+    
+            var feature_group_2dd96e68ca1b28d0fe97fc40d0babf42 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_109d6b39fb796f913391cb68f86c43a8 = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_14cf33f81780c6afdff8acf4e506896d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_315c6c82bf80d948b61b13ec15cd379d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fc6fd520cdad55414b4e944735ae3e1e = $(`<div id="html_fc6fd520cdad55414b4e944735ae3e1e" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ROBO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Asunción</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 25/04/2026</div>     <div style="margin-top: 8px; color: #333;">Tres hombres fueron detenidos por agentes policiales en inmediaciones del puente Héroes del Chaco, en la Costanera Norte de Asunción, luego de que un transeúnte alertara a patrulleros sobre la presencia de personas que transportaban armas largas ocultas en bolsas y mochilas. Al verificar la denuncia, los intervinientes encontraron en poder de los sospechosos armas de fabricación casera, cartuchos y armas blancas. El suboficial Vicente Maldonado, del Departamento de Seguridad Turística, señaló que las armas incautadas serían utilizadas habitualmente para hechos de abigeato por el grupo delictivo.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/detienen-a-tres-hombres-armados-bajo-el-puente-heroes-del-chaco/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_315c6c82bf80d948b61b13ec15cd379d.setContent(html_fc6fd520cdad55414b4e944735ae3e1e);
+            
+        
+
+        marker_109d6b39fb796f913391cb68f86c43a8.bindPopup(popup_315c6c82bf80d948b61b13ec15cd379d)
+        ;
+
+        
+    
+    
+            marker_109d6b39fb796f913391cb68f86c43a8.bindTooltip(
+                `<div>
+                     ROBO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_109d6b39fb796f913391cb68f86c43a8.setIcon(icon_14cf33f81780c6afdff8acf4e506896d);
+            
+    
+            var marker_8785a522ebb860aa212a2680b6061403 = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_fb537d00adcd6b50f4c25099de9edde3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9943a734401e44524d60fab637fbcac = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_155bba3a0da0396bb874d62a98a87785 = $(`<div id="html_155bba3a0da0396bb874d62a98a87785" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ROBO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Paso Yobái</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 25/04/2026</div>     <div style="margin-top: 8px; color: #333;">El productor yerbatero Arnaldo Aquino denunció en la Fiscalía General del Estado de Asunción la invasión irregular de seis hectáreas de su propiedad en el distrito de Paso Yobái, departamento de Guairá, así como el robo de su producción yerbatera desde el año 2023, que le generó pérdidas económicas estimadas en G. 75 millones durante los últimos tres años. El denunciante cuestionó la actuación de la jueza Liza Alfonso y el fiscal Rodrigo Vázquez, ambos del departamento de Guairá, y señaló que también acudió al Instituto Nacional de Desarrollo Rural y de la Tierra por la falta de respuestas de las instituciones locales.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/productor-yerbatero-denuncia-invasion-y-robo-de-su-produccion-en-paso-yobai/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_a9943a734401e44524d60fab637fbcac.setContent(html_155bba3a0da0396bb874d62a98a87785);
+            
+        
+
+        marker_8785a522ebb860aa212a2680b6061403.bindPopup(popup_a9943a734401e44524d60fab637fbcac)
+        ;
+
+        
+    
+    
+            marker_8785a522ebb860aa212a2680b6061403.bindTooltip(
+                `<div>
+                     ROBO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8785a522ebb860aa212a2680b6061403.setIcon(icon_fb537d00adcd6b50f4c25099de9edde3);
+            
+    
+            var marker_7790805d3acca16a48263f79f6036743 = L.marker(
+                [-25.2923636, -57.6619767],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_81de407458c91bc12123f62045f1b744 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7bfa59386461329c06e4caddfbd2538d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dc5311486d5b89899b14a34a61bc429e = $(`<div id="html_dc5311486d5b89899b14a34a61bc429e" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ASALTO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Asunción</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 19/04/2026</div>     <div style="margin-top: 8px; color: #333;">Detención de Lucas Isaac Prado Ramírez (19 años) por orden judicial del 22 de abril de 2026 emitida por la fiscal Soledad González por perturbación a la paz pública y otros delitos, vinculado a la gresca ocurrida el 19 de abril de 2026 en el Estadio Defensores del Chaco de Asunción durante el partido entre Olimpia y Vasco da Gama por la Copa Sudamericana. El joven fue interceptado por agentes de la Comisaría 2ª de Asunción durante el operativo de seguridad del encuentro al presentar actitud sospechosa, confirmándose la orden de detención vigente en su contra tras consultar en el Sistema Informático de la Policía.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/20/cae-buscado-por-disturbios-durante-superclasico/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_7bfa59386461329c06e4caddfbd2538d.setContent(html_dc5311486d5b89899b14a34a61bc429e);
+            
+        
+
+        marker_7790805d3acca16a48263f79f6036743.bindPopup(popup_7bfa59386461329c06e4caddfbd2538d)
+        ;
+
+        
+    
+    
+            marker_7790805d3acca16a48263f79f6036743.bindTooltip(
+                `<div>
+                     ASALTO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7790805d3acca16a48263f79f6036743.setIcon(icon_81de407458c91bc12123f62045f1b744);
+            
+    
+            var marker_3f9a3185dc617a91f4196b70b86430ae = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_8fb195cf80b860c6c1e45df881adc98f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fdbc89b5d62103171fed819a558a8df6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_66b536fc7fa703d47aff7239abe690c2 = $(`<div id="html_66b536fc7fa703d47aff7239abe690c2" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ROBO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Limpio</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 25/04/2026</div>     <div style="margin-top: 8px; color: #333;">Félix Germán Pérez Bernal, encargado de la sucursal de la empresa MV Aceros, denunció un robo ocurrido a las 06:00 del 2026-04-25 en el local ubicado en la Compañía Montaña Alta de Limpio, donde desconocidos abrieron un boquete en la pared posterior de metal para ingresar, aprovechando que conocían los dispositivos de seguridad con sensores de movimiento activos durante la noche, y el local solo contaba con guardias de seguridad privada en horario diurno.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/limpio-roban-dinero-y-arma-de-una-firma-dedicada-a-la-venta-de-hierros/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_fdbc89b5d62103171fed819a558a8df6.setContent(html_66b536fc7fa703d47aff7239abe690c2);
+            
+        
+
+        marker_3f9a3185dc617a91f4196b70b86430ae.bindPopup(popup_fdbc89b5d62103171fed819a558a8df6)
+        ;
+
+        
+    
+    
+            marker_3f9a3185dc617a91f4196b70b86430ae.bindTooltip(
+                `<div>
+                     ROBO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3f9a3185dc617a91f4196b70b86430ae.setIcon(icon_8fb195cf80b860c6c1e45df881adc98f);
+            
+    
+            var marker_4252e9fa8576efec809d5ba03f072076 = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_eaa24ac480fea3e4f732b9dc2c7bdda4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ba683bb07755445198302dbfc5936004 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_36211912746149ef7672381f2484a665 = $(`<div id="html_36211912746149ef7672381f2484a665" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ROBO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Asunción</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 21/05/2026</div>     <div style="margin-top: 8px; color: #333;">Detención de tres hombres armados en inmediaciones del puente Héroes del Chaco</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/detienen-a-tres-hombres-armados-bajo-el-puente-heroes-del-chaco/" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_ba683bb07755445198302dbfc5936004.setContent(html_36211912746149ef7672381f2484a665);
+            
+        
+
+        marker_4252e9fa8576efec809d5ba03f072076.bindPopup(popup_ba683bb07755445198302dbfc5936004)
+        ;
+
+        
+    
+    
+            marker_4252e9fa8576efec809d5ba03f072076.bindTooltip(
+                `<div>
+                     ROBO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4252e9fa8576efec809d5ba03f072076.setIcon(icon_eaa24ac480fea3e4f732b9dc2c7bdda4);
+            
+    
+            var marker_cdd6f1a25b0fc737a0529b8c44f8d364 = L.marker(
+                [-23.3165935, -58.1693445],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_e71661aacfb7fedd242d3db2fe8def5a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8df94e7f7c2816ec702555edc91004f6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2e89783c6ebf4d1fed7a118e83ba9a14 = $(`<div id="html_2e89783c6ebf4d1fed7a118e83ba9a14" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:gray; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         LAVADO DE DINERO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> </div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 21/05/2026</div>     <div style="margin-top: 8px; color: #333;">La Fiscalía presentó acusación formal contra Gianina García Troche por supuesto lavado de dinero proveniente del narcotráfico.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/20/a-ultranza-presentan-acusacion-contra-gianina-garcia-por-lavado-de-dinero/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_8df94e7f7c2816ec702555edc91004f6.setContent(html_2e89783c6ebf4d1fed7a118e83ba9a14);
+            
+        
+
+        marker_cdd6f1a25b0fc737a0529b8c44f8d364.bindPopup(popup_8df94e7f7c2816ec702555edc91004f6)
+        ;
+
+        
+    
+    
+            marker_cdd6f1a25b0fc737a0529b8c44f8d364.bindTooltip(
+                `<div>
+                     LAVADO DE DINERO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cdd6f1a25b0fc737a0529b8c44f8d364.setIcon(icon_e71661aacfb7fedd242d3db2fe8def5a);
+            
+    
+            var marker_b9761e2dc644734eb82c1069cb2c003b = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_4e96c6712fa91e70d8b83201b24c886e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bbee2ab904400e7df3d11df728040075 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8a4968de28106959b959fe571b2af330 = $(`<div id="html_8a4968de28106959b959fe571b2af330" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ASALTO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> </div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 25/04/2026</div>     <div style="margin-top: 8px; color: #333;">Datos de inteligencia de la Policía Nacional de Alto Paraná alertaron sobre el plan de un grupo de aproximadamente 20 personas para asaltar el Aeropuerto Internacional Guaraní y robar cargas de dispositivos electrónicos importados por la terminal aérea, por lo que se desplegaron 40 agentes del Grupo Especial de Operaciones y efectivos militares en la zona para extremar las medidas de seguridad.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/policia-nacional-en-alto-parana-en-alerta-por-posibles-asaltos/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_bbee2ab904400e7df3d11df728040075.setContent(html_8a4968de28106959b959fe571b2af330);
+            
+        
+
+        marker_b9761e2dc644734eb82c1069cb2c003b.bindPopup(popup_bbee2ab904400e7df3d11df728040075)
+        ;
+
+        
+    
+    
+            marker_b9761e2dc644734eb82c1069cb2c003b.bindTooltip(
+                `<div>
+                     ASALTO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b9761e2dc644734eb82c1069cb2c003b.setIcon(icon_4e96c6712fa91e70d8b83201b24c886e);
+            
+    
+            var marker_0ff3054889597b4094969eaaaff0caa5 = L.marker(
+                [-22.5417995, -55.7325389],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_76fe9622a850d3fe82a04c43c016066f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e4ec503a7141908aadda5d6d837d2da9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a4d56ef6f8b9de9e59a80dc7ae01af6b = $(`<div id="html_a4d56ef6f8b9de9e59a80dc7ae01af6b" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ROBO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Pedro Juan Caballero</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 21/05/2026</div>     <div style="margin-top: 8px; color: #333;">Aprehendidos dos personas en una camioneta Toyota Fortuner con una pistola calibre 9 mm sin documentos del vehículo</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/capturan-a-dos-sujetos-con-arma-tras-persecucion-en-pedro-juan-caballero/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_e4ec503a7141908aadda5d6d837d2da9.setContent(html_a4d56ef6f8b9de9e59a80dc7ae01af6b);
+            
+        
+
+        marker_0ff3054889597b4094969eaaaff0caa5.bindPopup(popup_e4ec503a7141908aadda5d6d837d2da9)
+        ;
+
+        
+    
+    
+            marker_0ff3054889597b4094969eaaaff0caa5.bindTooltip(
+                `<div>
+                     ROBO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0ff3054889597b4094969eaaaff0caa5.setIcon(icon_76fe9622a850d3fe82a04c43c016066f);
+            
+    
+            var marker_ae642a3d89ec193ed3a2d8f39a5a1892 = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_6d07b84560ab38868db9144e8b8d58f2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_95f3d4aab7f0a70b0d6cc53fdcefa589 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ef1dbf648af7e6ecdb427d6d10769cb2 = $(`<div id="html_ef1dbf648af7e6ecdb427d6d10769cb2" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:orange; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         HOMICIDIO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> San Lorenzo</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 20/05/2026</div>     <div style="margin-top: 8px; color: #333;">Hallazgo de un cadáver en avanzado estado de putrefacción dentro de una vivienda abandonada</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/san-lorenzo-hallan-cadaver-en-descomposicion-en-casa-abandonada/#comments-section" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_95f3d4aab7f0a70b0d6cc53fdcefa589.setContent(html_ef1dbf648af7e6ecdb427d6d10769cb2);
+            
+        
+
+        marker_ae642a3d89ec193ed3a2d8f39a5a1892.bindPopup(popup_95f3d4aab7f0a70b0d6cc53fdcefa589)
+        ;
+
+        
+    
+    
+            marker_ae642a3d89ec193ed3a2d8f39a5a1892.bindTooltip(
+                `<div>
+                     HOMICIDIO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ae642a3d89ec193ed3a2d8f39a5a1892.setIcon(icon_6d07b84560ab38868db9144e8b8d58f2);
+            
+    
+            var marker_59075dde06b126dc3392f139a395063a = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_c91a1477a1904a5390b67d5a193292b9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_64e5c5a5305404c2cea9d6fe39125780 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_098087404a95f9ffd0088aa07fe578ff = $(`<div id="html_098087404a95f9ffd0088aa07fe578ff" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ASALTO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Ciudad del Este</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 20/05/2026</div>     <div style="margin-top: 8px; color: #333;">Prevención de asalto en el Aeropuerto Internacional Guaraní ante datos de inteligencia que sugerían un posible atraco a cargas de dispositivos electrónicos importados.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/policia-nacional-en-alto-parana-en-alerta-por-posibles-asaltos/" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_64e5c5a5305404c2cea9d6fe39125780.setContent(html_098087404a95f9ffd0088aa07fe578ff);
+            
+        
+
+        marker_59075dde06b126dc3392f139a395063a.bindPopup(popup_64e5c5a5305404c2cea9d6fe39125780)
+        ;
+
+        
+    
+    
+            marker_59075dde06b126dc3392f139a395063a.bindTooltip(
+                `<div>
+                     ASALTO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_59075dde06b126dc3392f139a395063a.setIcon(icon_c91a1477a1904a5390b67d5a193292b9);
+            
+    
+            var marker_a473f187cf3cd7ad665dd62386cacd47 = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_dd005602cdcbcc54563e567db5227681 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2e3d217bb21bfba27c4360036e38c432 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dac548a18473dd5faceec94b24bcb2ef = $(`<div id="html_dac548a18473dd5faceec94b24bcb2ef" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ASALTO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Alto Paraná</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 21/05/2026</div>     <div style="margin-top: 8px; color: #333;">Cuatro personas perpetraron un violento asalto en el supermercado El Campo y se llevaron a un adolescente de 15 años.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_2e3d217bb21bfba27c4360036e38c432.setContent(html_dac548a18473dd5faceec94b24bcb2ef);
+            
+        
+
+        marker_a473f187cf3cd7ad665dd62386cacd47.bindPopup(popup_2e3d217bb21bfba27c4360036e38c432)
+        ;
+
+        
+    
+    
+            marker_a473f187cf3cd7ad665dd62386cacd47.bindTooltip(
+                `<div>
+                     ASALTO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a473f187cf3cd7ad665dd62386cacd47.setIcon(icon_dd005602cdcbcc54563e567db5227681);
+            
+    
+            var marker_b03657eebb82e08e711d3e4dfb829f44 = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_4a9416791dc21e2c6be03a0be90b56c1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_07893fe9e88fe2c43bb5cf280222240c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3613d1f1c75ce90a38ff679d38341951 = $(`<div id="html_3613d1f1c75ce90a38ff679d38341951" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ROBO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Paso Yobái</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 25/04/2026</div>     <div style="margin-top: 8px; color: #333;">El productor yerbatero Arnaldo Aquino denunció en la Fiscalía General del Estado de Asunción el robo de toda su producción yerbatera y la invasión irregular de seis hectáreas de su propiedad en el distrito de Paso Yobái, departamento de Guairá, ocurridos desde el año 2023, que le generaron pérdidas económicas estimadas en G. 75 millones, además de cuestionar la falta de actuación de las instituciones locales de Guairá.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/productor-yerbatero-denuncia-invasion-y-robo-de-su-produccion-en-paso-yobai/" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_07893fe9e88fe2c43bb5cf280222240c.setContent(html_3613d1f1c75ce90a38ff679d38341951);
+            
+        
+
+        marker_b03657eebb82e08e711d3e4dfb829f44.bindPopup(popup_07893fe9e88fe2c43bb5cf280222240c)
+        ;
+
+        
+    
+    
+            marker_b03657eebb82e08e711d3e4dfb829f44.bindTooltip(
+                `<div>
+                     ROBO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b03657eebb82e08e711d3e4dfb829f44.setIcon(icon_4a9416791dc21e2c6be03a0be90b56c1);
+            
+    
+            var marker_1ed3c97553a1656ef09aeec23095deff = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_53e04849b0e075e4a5c43d63199a9720 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b6c253aa91c55a4e097e33203bafc1f8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_02d725b9ab447ffdd8f4138e8948ac8d = $(`<div id="html_02d725b9ab447ffdd8f4138e8948ac8d" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:orange; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         HOMICIDIO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> San Lorenzo</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 20/05/2026</div>     <div style="margin-top: 8px; color: #333;">Hallazgo de un cadáver en avanzado estado de putrefacción dentro de una vivienda abandonada.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/san-lorenzo-hallan-cadaver-en-descomposicion-en-casa-abandonada/" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_b6c253aa91c55a4e097e33203bafc1f8.setContent(html_02d725b9ab447ffdd8f4138e8948ac8d);
+            
+        
+
+        marker_1ed3c97553a1656ef09aeec23095deff.bindPopup(popup_b6c253aa91c55a4e097e33203bafc1f8)
+        ;
+
+        
+    
+    
+            marker_1ed3c97553a1656ef09aeec23095deff.bindTooltip(
+                `<div>
+                     HOMICIDIO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1ed3c97553a1656ef09aeec23095deff.setIcon(icon_53e04849b0e075e4a5c43d63199a9720);
+            
+    
+            var marker_09212194ef2c0b2adc6a8444407f257c = L.marker(
+                [-25.2923636, -57.6619767],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_ede776ee905c26c3c1f28a465a1c0b01 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0ae34dff6c62e682e80650d013397f93 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d68e6243e84ac17cc6872448387ff254 = $(`<div id="html_d68e6243e84ac17cc6872448387ff254" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:gray; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">      </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Asunción</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 19/04/2026</div>     <div style="margin-top: 8px; color: #333;">Lucas Isaac Prado Ramírez de 19 años fue detenido por agentes de la Comisaría 2ª de Asunción en el Estadio Defensores del Chaco durante el operativo de seguridad del partido de la Copa Sudamericana entre Olimpia y Vasco da Gama, al contar con una orden de detención emitida el 22 de abril de 2026 por la fiscal Soledad González por perturbación a la paz pública derivada de incidentes en el superclásico del 19 de abril de 2026.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/20/cae-buscado-por-disturbios-durante-superclasico/" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_0ae34dff6c62e682e80650d013397f93.setContent(html_d68e6243e84ac17cc6872448387ff254);
+            
+        
+
+        marker_09212194ef2c0b2adc6a8444407f257c.bindPopup(popup_0ae34dff6c62e682e80650d013397f93)
+        ;
+
+        
+    
+    
+            marker_09212194ef2c0b2adc6a8444407f257c.bindTooltip(
+                `<div>
+                     
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_09212194ef2c0b2adc6a8444407f257c.setIcon(icon_ede776ee905c26c3c1f28a465a1c0b01);
+            
+    
+            var marker_ca5faa7d496e8c7d12597d54594e9a4e = L.marker(
+                [-25.2822, -57.6359],
+                {
+}
+            ).addTo(feature_group_2dd96e68ca1b28d0fe97fc40d0babf42);
+        
+    
+            var icon_1dfaa6457518488b95c9d66d7f2c8167 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "user-secret",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6dc60a00de6d8d9e11175c0455565423 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6422ccfd6da65280d986befb413db0d3 = $(`<div id="html_6422ccfd6da65280d986befb413db0d3" style="width: 100.0%; height: 100.0%;"> <div style="width: 250px; font-family: Arial, sans-serif; font-size: 13px;">     <div style="background-color:red; color: white; padding: 8px 10px; border-radius: 6px; text-align: center; font-weight: bold;">         ROBO     </div>     <hr style="margin: 8px 0;">     <div><strong>Ciudad:</strong> Limpio</div>     <div style="margin-top: 8px;"><strong>Fecha:</strong> 25/04/2026</div>     <div style="margin-top: 8px; color: #333;">Empleado de la sucursal de MV Aceros denunció un robo ocurrido a las 06:00 del día de la fecha en el local ubicado en la Compañía Montaña Alta, Limpio. Los delincuentes abrieron un boquete en la pared posterior de metal del edificio para ingresar, conocían los sistemas de seguridad con sensores de movimiento activados durante la noche. El local cuenta con guardias de seguridad privada solo en horario diurno.</div>     <div style="margin-top: 10px;"><a href="https://www.abc.com.py/policiales/2026/05/21/limpio-roban-dinero-y-arma-de-una-firma-dedicada-a-la-venta-de-hierros/" target="_blank" rel="noopener noreferrer" style="color:#333; text-decoration:none;">Fuente</a></div> </div> </div>`)[0];
+                popup_6dc60a00de6d8d9e11175c0455565423.setContent(html_6422ccfd6da65280d986befb413db0d3);
+            
+        
+
+        marker_ca5faa7d496e8c7d12597d54594e9a4e.bindPopup(popup_6dc60a00de6d8d9e11175c0455565423)
+        ;
+
+        
+    
+    
+            marker_ca5faa7d496e8c7d12597d54594e9a4e.bindTooltip(
+                `<div>
+                     ROBO
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ca5faa7d496e8c7d12597d54594e9a4e.setIcon(icon_1dfaa6457518488b95c9d66d7f2c8167);
+            
+    
+            feature_group_2dd96e68ca1b28d0fe97fc40d0babf42.addTo(map_2a20e7ab6ab6a402dc13efee2a921756);
+        
+    
+            var feature_group_fcf56e406127cab30a8b576f7670f17d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_761ad7b50cbbbc7fae4c9ec29d77496b = L.heatLayer(
+                [[-25.2822, -57.6359], [-25.2822, -57.6359], [-25.2923636, -57.6619767], [-25.2822, -57.6359], [-25.2822, -57.6359], [-23.3165935, -58.1693445], [-25.2822, -57.6359], [-22.5417995, -55.7325389], [-25.2822, -57.6359], [-25.2822, -57.6359], [-25.2822, -57.6359], [-25.2822, -57.6359], [-25.2822, -57.6359], [-25.2923636, -57.6619767], [-25.2822, -57.6359]],
+                {
+  "minOpacity": 0.4,
+  "maxZoom": 12,
+  "radius": 18,
+  "blur": 16,
+  "gradient": {
+  0.2: "#2c7bb6",
+  0.4: "#00a6ca",
+  0.6: "#00cc66",
+  0.8: "#ffcc00",
+  1.0: "#d7191c",
+},
+}
+            );
+        
+    
+            heat_map_761ad7b50cbbbc7fae4c9ec29d77496b.addTo(feature_group_fcf56e406127cab30a8b576f7670f17d);
+        
+    
+            feature_group_fcf56e406127cab30a8b576f7670f17d.addTo(map_2a20e7ab6ab6a402dc13efee2a921756);
+        
+    
+            var layer_control_0e3202871f9070a65d580e58400c566c_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_e87aff0ed8b5ca6643067f0c2e1655b3,
+                },
+                overlays :  {
+                    "Incidentes individuales" : feature_group_2dd96e68ca1b28d0fe97fc40d0babf42,
+                    "Mapa de calor" : feature_group_fcf56e406127cab30a8b576f7670f17d,
+                },
+            };
+            let layer_control_0e3202871f9070a65d580e58400c566c = L.control.layers(
+                layer_control_0e3202871f9070a65d580e58400c566c_layers.base_layers,
+                layer_control_0e3202871f9070a65d580e58400c566c_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_2a20e7ab6ab6a402dc13efee2a921756);
+
+        
+</script>
+</html>

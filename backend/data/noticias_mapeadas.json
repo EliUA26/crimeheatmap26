@@ -1,0 +1,122 @@
+[
+  {
+    "url_fuente": "https://www.latribuna.com.py/sucesos/policiales/2026/05/01/policia-de-boqueron-investiga-caida-de-helicoptero-y-posterior-ocultamiento-de-evidencias/",
+    "tipo_delito": "NARCOTRAFICO",
+    "fecha_evento": "2026-05-01",
+    "gravedad": 10,
+    "ubicacion_texto": "Zona rural de Mariscal Estigarribia",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "La Policía investigó la caída de un helicóptero vinculado al narcotráfico y el intento de ocultar evidencias enterrando partes de la aeronave y el cuerpo del piloto.",
+    "lat": -22.0300,
+    "lng": -60.6200
+  },
+  {
+    "url_fuente": "https://www.ultimahora.com/caen-dos-sospechosos-del-homicidio-de-una-adolescente-indigena-en-el-chaco",
+    "tipo_delito": "HOMICIDIO",
+    "fecha_evento": "2025-04-28",
+    "gravedad": 10,
+    "ubicacion_texto": "Ruta PY09 km 525",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Dos hombres fueron detenidos por el asesinato de una adolescente indígena hallada en el Chaco.",
+    "lat": -22.0500,
+    "lng": -60.6500
+  },
+  {
+    "url_fuente": "https://www.ultimahora.com/senad-detecta-17-kilos-de-cocaina-en-camion-cisterna-procedente-de-bolivia",
+    "tipo_delito": "NARCOTRAFICO",
+    "fecha_evento": "2025-05-05",
+    "gravedad": 9,
+    "ubicacion_texto": "Mayor Infante Rivarola",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Agentes de Senad interceptaron un camión cisterna con 17 kilos de cocaína provenientes de Bolivia.",
+    "lat": -21.5600,
+    "lng": -62.3500
+  },
+  {
+    "url_fuente": "https://www.ultimahora.com/cae-presunta-narco-gamer-que-distribuia-cocaina-mariscal-estigarribia-n3065898",
+    "tipo_delito": "NARCOTRAFICO",
+    "fecha_evento": "2023-05-31",
+    "gravedad": 8,
+    "ubicacion_texto": "Mariscal Estigarribia",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Una mujer fue detenida por distribuir cocaína oculta dentro de una consola de videojuegos.",
+    "lat": -22.0300,
+    "lng": -60.6200
+  },
+  {
+    "url_fuente": "https://www.ultimahora.com/hallan-restos-calcinados-una-mujer-y-presunto-autor-se-autoelimina-n3019235",
+    "tipo_delito": "HOMICIDIO",
+    "fecha_evento": "2024-12-02",
+    "gravedad": 10,
+    "ubicacion_texto": "Vivienda incendiada en Mariscal Estigarribia",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Hallaron restos calcinados de una mujer y el principal sospechoso se suicidó.",
+    "lat": -22.0300,
+    "lng": -60.6200
+  },
+  {
+    "url_fuente": "https://www.ultimahora.com/sobrino-militar-del-ex-senador-galaverna-muere-ser-agredido-el-chaco-n3046434",
+    "tipo_delito": "HOMICIDIO",
+    "fecha_evento": "2024-01-26",
+    "gravedad": 9,
+    "ubicacion_texto": "Tercer Cuerpo de Ejército",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Un capitán del Ejército falleció tras ser brutalmente golpeado en el cuartel militar.",
+    "lat": -22.0300,
+    "lng": -60.6200
+  },
+  {
+    "url_fuente": "https://www.abc.com.py/tag/policia-boqueron/",
+    "tipo_delito": "HOMICIDIO",
+    "fecha_evento": "2020-10-02",
+    "gravedad": 10,
+    "ubicacion_texto": "Zona 4 de Mayo, Alto Chaco",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Encontraron una avioneta incinerada y el cuerpo enterrado del piloto asesinado.",
+    "lat": -21.9000,
+    "lng": -60.7500
+  },
+  {
+    "url_fuente": "https://rcc.com.py/videos/operativos-policiales-dan-su-fruto-en-el-departamento-de-boqueron/",
+    "tipo_delito": "HURTO",
+    "fecha_evento": "2022-12-15",
+    "gravedad": 5,
+    "ubicacion_texto": "Distrito de Mariscal Estigarribia",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Operativos permitieron recuperar motocicletas robadas y detener sospechosos.",
+    "lat": -22.0300,
+    "lng": -60.6200
+  },
+  {
+    "url_fuente": "https://www.ultimahora.com/peon-detenido-matar-visitante-y-abusar-su-pareja-el-chaco-n3039698",
+    "tipo_delito": "HOMICIDIO",
+    "fecha_evento": "2023-01-03",
+    "gravedad": 10,
+    "ubicacion_texto": "Estancia del Chaco",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Un peón fue detenido por asesinato y abuso sexual en una estancia del Chaco.",
+    "lat": -22.0300,
+    "lng": -60.6200
+  },
+  {
+    "url_fuente": "https://www.facebook.com/61565519304473/videos/joven-es-detenido-tras-homicidio-en-estancia-de-mariscal-estigarribiaboquer%C3%B3ncha/4234701446791299/",
+    "tipo_delito": "HOMICIDIO",
+    "fecha_evento": "2026-05-25",
+    "gravedad": 9,
+    "ubicacion_texto": "Estancia en Boquerón",
+    "barrio": "",
+    "ciudad": "Mariscal Estigarribia",
+    "resumen_breve": "Un joven fue detenido tras un homicidio ocurrido en una estancia chaqueña.",
+    "lat": -22.0500,
+    "lng": -60.6500
+  }
+]
