@@ -1,16 +1,27 @@
 import os
 from flask import Flask, send_file
+from backend.proyecto_heatmapp.conexiondb import get_connection
+from flask import jsonify
 
 
 app = Flask(__name__)
 
 
-ruta_mapa = 'backend/proyecto_heatmapp/MAPA_FINAL_ENTREGA.html'
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
+ruta_mapa = os.path.join(
+    script_dir,
+    'backend',
+    'proyecto_heatmapp',
+    'mapa.html'
+)
 
 def actualizar_mapa():
     print('actualizando mapa..')
     os.system('python3 backend/proyecto_heatmapp/super_integrador.py') 
+
+
+
 
 
 def ejecutar_pipeline():
@@ -40,11 +51,44 @@ def actmapa():
      
      return "actualizando mapa.."
 
+
+@app.route("/api/delitos")
+def delitos():
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT
+            tipo_delito,
+            resumen_breve,
+            ST_Y(geom) AS lat,
+            ST_X(geom) AS lng,
+            ciudad,
+            url_fuente
+        FROM delitos
+        WHERE geom IS NOT NULL
+    """)
+
+    rows = cur.fetchall()
+
+    data = []
+
+    for row in rows:
+        data.append({
+            "tipo": row.get("tipo_delito"),
+            "resumen": row.get("resumen_breve"),
+            "lat": row.get("lat"),
+            "lng": row.get("lng"),
+            "ciudad": row.get("ciudad"),
+            "url": row.get("url_fuente")
+        })
+
+    cur.close()
+    conn.close()
+
+    return jsonify(data)
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
-
-
-   
-
