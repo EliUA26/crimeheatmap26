@@ -5,3 +5,4 @@ geopy
 requests
 g4f
 flask
+bs4

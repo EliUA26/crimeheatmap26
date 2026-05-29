@@ -65,7 +65,9 @@ def delitos():
             ST_Y(geom) AS lat,
             ST_X(geom) AS lng,
             ciudad,
-            url_fuente
+            url_fuente,
+            fecha_evento,
+            SUBSTRING(url_fuente FROM 'https?://(?:www\.)?([^.]+)') AS fuente
         FROM delitos
         WHERE geom IS NOT NULL
     """)
@@ -81,6 +83,8 @@ def delitos():
             "lat": row.get("lat"),
             "lng": row.get("lng"),
             "ciudad": row.get("ciudad"),
+            "fecha": row.get("fecha_evento").isoformat() if row.get("fecha_evento") else None,
+            "fuente": row.get("fuente"),
             "url": row.get("url_fuente")
         })
 
